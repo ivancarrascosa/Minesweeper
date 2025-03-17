@@ -8,8 +8,21 @@ public class MinesweeperMain {
 		
 		Scanner sc = new Scanner (System.in);
 
+		boolean boom=false;
 		
+		while(!boom) {
+			
+			
+			
 		Minesweeper.printBoard();
+		
+		
+		
+		
+		}
+		
+		
+		
 		
 		sc.close();
 
