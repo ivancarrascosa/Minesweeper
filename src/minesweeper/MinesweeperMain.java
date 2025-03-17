@@ -7,10 +7,9 @@ public class MinesweeperMain {
 	public static void main(String[] args) {
 		
 		Scanner sc = new Scanner (System.in);
+
 		
-		Minesweeper player;
-		
-		
+		Minesweeper.printBoard();
 		
 		sc.close();
 
