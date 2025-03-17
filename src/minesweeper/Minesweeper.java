@@ -43,5 +43,23 @@ public class Minesweeper {
 			}
 		}
 	}
+	
+	public static boolean userSelection(int x, int y) {
+		boolean res = false;
+		int minesCounter = 0;
+		
+		if (fullBoard[x][y] != 'M') {
+			if(x == 0 && y == 0) {
+				if(fullBoard[1][0] == 'M') {
+					minesCounter += 1;
+				} else {
+					Minesweeper.userSelection(1, 0);
+				}
+			}
+		} else {
+			res = true;
+		}
+		return res;
+	}
 
 }
