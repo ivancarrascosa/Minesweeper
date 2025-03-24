@@ -8,9 +8,13 @@ public class MinesweeperMain {
 		
 		Scanner sc = new Scanner (System.in);
 
-		boolean boom=false;
-		
-		while(!boom) {
+		boolean boom = false;
+		Minesweeper.printBoard();
+		Minesweeper.putMines();
+		Minesweeper.printBoard();
+		Minesweeper.lookForMine(0, 0);
+		Minesweeper.printBoard();
+		while(boom) {
 			
 			
 			
