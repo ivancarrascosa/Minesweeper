@@ -1,6 +1,6 @@
 package minesweeper;
 
-import java.nio.file.spi.FileSystemProvider;
+
 import java.util.Scanner;
 
 public class MinesweeperMain {
