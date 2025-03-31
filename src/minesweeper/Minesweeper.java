@@ -14,25 +14,28 @@ public class Minesweeper {
 	private static int numberOfMines = 10;
 
 	public static void printBoard() {
-		char column = 'A';
+		char row = 'A';
 		for (int i = 1; i <= M; i++) {
 			System.out.print("\t" + i);
 		}
 		System.out.println("");
 		for (int i = 0; i < N; i++) {
-			System.out.print(column + "\t");
+			System.out.print(row + "\t");
 			for (int j = 0; j < M; j++) {
-				System.out.print(fullBoard[i][j] + "\t");
+				System.out.print(playerBoard[i][j] + "\t");
 			}
 			System.out.println("");
-			column++;
+			row++;
 		}
 
 	}
-
+	
 	public static void putMines() {
 		for (int i = 0; i < fullBoard.length; i++) {
 			Arrays.fill(fullBoard[i], ' ');
+		}
+		for (int i = 0; i < playerBoard.length; i++) {
+			Arrays.fill(playerBoard[i], ' ');
 		}
 		Random rand = new Random();
 		int X;
@@ -47,7 +50,7 @@ public class Minesweeper {
 			}
 		}
 	}
-
+	
 	public static boolean lookForMine(int x, int y) {
 		boolean res = false;
 		char minesCounter = '0';
@@ -55,7 +58,7 @@ public class Minesweeper {
 		if (fullBoard[y][x] != 'M') {
 			for (int i = -1; i <= 1; i++) {
 				for (int j = -1; j <= 1; j++) {
-					// Si se sale del rango o ambos son 0, pasa a la siguiente iteración
+					// If it goes out of range or its 0, it goes to the next iteration
 					if (x + j <= -1 || x + j >= M || y + i <= -1 || y + i >= N || (i == 0 && j == 0)) {
 						continue;
 					} else {
@@ -73,10 +76,8 @@ public class Minesweeper {
 						if (x + j <= -1 || x + j >= M || y + i <= -1 || y + i >= N || (i == 0 && j == 0)) {
 							continue;
 						} else {
-							if (fullBoard[y + i][x + j] != 'M') {
-								if (fullBoard[y + i][x + j] == ' ') {
+							if (fullBoard[y + i][x + j] != 'M' && playerBoard[y + i][x + j] == ' ') {
 									lookForMine(x + j, y + i);
-								}
 							}
 						}
 
@@ -85,6 +86,7 @@ public class Minesweeper {
 			}
 
 		} else {
+			playerBoard[y][x] = 'M';
 			res = true;
 		}
 		return res;

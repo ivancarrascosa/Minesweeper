@@ -11,25 +11,19 @@ public class MinesweeperMain {
 		boolean boom = false;
 		Minesweeper.printBoard();
 		Minesweeper.putMines();
-		Minesweeper.printBoard();
 		Minesweeper.lookForMine(0, 0);
 		Minesweeper.printBoard();
-		while(boom) {
-			
-			
-			
-		Minesweeper.printBoard();
 		
-		
-		
-		
-		}
 		
 		
 		
 		
 		sc.close();
 
+	}
+	
+	public int changeToInt (char character) {
+		return (int) character - 11;
 	}
 
 }
