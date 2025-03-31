@@ -14,20 +14,12 @@ public class MinesweeperMain {
 		Minesweeper.putMines();
 		Minesweeper.lookForMine(0, 0);
 		Minesweeper.printBoard();
-<<<<<<< HEAD
-		
-		
-		
-		
-		
-=======
 		while (boom) {
 
 			Minesweeper.printBoard();
 
 		}
 
->>>>>>> 4055755092d1cfc144a4525506dfedbd5ea23a6d
 		sc.close();
 
 	}
