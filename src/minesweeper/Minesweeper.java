@@ -89,4 +89,10 @@ public class Minesweeper {
 		}
 		return res;
 	}
+	
+	public static boolean checkMine (int x, int y) {
+		boolean si=false;
+		return si;
+		//modificar
+	}
 }
