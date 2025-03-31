@@ -1,5 +1,6 @@
 package minesweeper;
 
+import java.util.Arrays;
 import java.util.Random;
 
 public class Minesweeper {
@@ -30,6 +31,9 @@ public class Minesweeper {
 	}
 
 	public static void putMines() {
+		for (int i = 0; i < fullBoard.length; i++) {
+			Arrays.fill(fullBoard[i], ' ');
+		}
 		Random rand = new Random();
 		int X;
 		int Y;
@@ -46,7 +50,7 @@ public class Minesweeper {
 
 	public static boolean lookForMine(int x, int y) {
 		boolean res = false;
-		int minesCounter = 0;
+		char minesCounter = '0';
 
 		if (fullBoard[y][x] != 'M') {
 			for (int i = -1; i <= 1; i++) {
@@ -55,22 +59,34 @@ public class Minesweeper {
 					if (x + j <= -1 || x + j >= M || y + i <= -1 || y + i >= N || (i == 0 && j == 0)) {
 						continue;
 					} else {
-						if (fullBoard[x + j][y + i] == 'M') {
+						if (fullBoard[y + i][x + j] == 'M') {
 							minesCounter++;
-							fullBoard[x + j][y + i] = (char) minesCounter;
-						} else if (fullBoard[x + j][y + i] != 'M') {
-							continue;
-						} else {
-							lookForMine(x + j, y + i);
 						}
 					}
 				}
+
 			}
-			fullBoard[y][x] = (char) 1;
+			playerBoard[y][x] = minesCounter;
+			if (minesCounter == '0') {
+				for (int i = -1; i <= 1; i++) {
+					for (int j = -1; j <= 1; j++) {
+						if (x + j <= -1 || x + j >= M || y + i <= -1 || y + i >= N || (i == 0 && j == 0)) {
+							continue;
+						} else {
+							if (fullBoard[y + i][x + j] != 'M') {
+								if (fullBoard[y + i][x + j] == ' ') {
+									lookForMine(x + j, y + i);
+								}
+							}
+						}
+
+					}
+				}
+			}
+
 		} else {
 			res = true;
 		}
 		return res;
 	}
-
 }
