@@ -4,24 +4,24 @@ import java.util.Arrays;
 import java.util.Random;
 
 public class Minesweeper {
-	private static final int N = 7;
-	private static final int M = 7;
+	private static final int Rows = 7;
+	private static final int Columns = 7;
 
-	private static char[][] playerBoard = new char[N][M];
+	private static char[][] playerBoard = new char[Rows][Columns];
 
-	private static char[][] fullBoard = new char[N][M];
+	private static char[][] fullBoard = new char[Rows][Columns];
 
 	private static int numberOfMines = 10;
 
 	public static void printBoard() {
 		char row = 'A';
-		for (int i = 1; i <= M; i++) {
+		for (int i = 1; i <= Columns; i++) {
 			System.out.print("\t" + i);
 		}
 		System.out.println("");
-		for (int i = 0; i < N; i++) {
+		for (int i = 0; i < Rows; i++) {
 			System.out.print(row + "\t");
-			for (int j = 0; j < M; j++) {
+			for (int j = 0; j < Columns; j++) {
 				System.out.print(playerBoard[i][j] + "\t");
 			}
 			System.out.println("");
@@ -42,8 +42,8 @@ public class Minesweeper {
 		int Y;
 		int cont = 0;
 		while (cont < numberOfMines) {
-			X = rand.nextInt(0, M);
-			Y = rand.nextInt(0, N);
+			X = rand.nextInt(0, Columns);
+			Y = rand.nextInt(0, Rows);
 			if (fullBoard[X][Y] != 'M') {
 				fullBoard[X][Y] = 'M';
 				cont++;
@@ -59,7 +59,7 @@ public class Minesweeper {
 			for (int i = -1; i <= 1; i++) {
 				for (int j = -1; j <= 1; j++) {
 					// If it goes out of range or its 0, it goes to the next iteration
-					if (x + j <= -1 || x + j >= M || y + i <= -1 || y + i >= N || (i == 0 && j == 0)) {
+					if (x + j <= -1 || x + j >= Columns || y + i <= -1 || y + i >= Rows || (i == 0 && j == 0)) {
 						continue;
 					} else {
 						if (fullBoard[y + i][x + j] == 'M') {
@@ -73,7 +73,7 @@ public class Minesweeper {
 			if (minesCounter == '0') {
 				for (int i = -1; i <= 1; i++) {
 					for (int j = -1; j <= 1; j++) {
-						if (x + j <= -1 || x + j >= M || y + i <= -1 || y + i >= N || (i == 0 && j == 0)) {
+						if (x + j <= -1 || x + j >= Columns || y + i <= -1 || y + i >= Rows || (i == 0 && j == 0)) {
 							continue;
 						} else {
 							if (fullBoard[y + i][x + j] != 'M' && playerBoard[y + i][x + j] == ' ') {
@@ -87,6 +87,22 @@ public class Minesweeper {
 
 		} else {
 			playerBoard[y][x] = 'M';
+			res = true;
+		}
+		return res;
+	}
+	
+	public static boolean ganador() {
+		boolean res = false;
+		int cont = 0;
+		for (int i = 0 ; i < Rows ; i++) {
+			for (int j = 0 ; i < Columns ; i++) {
+				if(playerBoard[i][j] == ' ') {
+					cont++;
+				}
+			}
+		}
+		if (cont == numberOfMines) {
 			res = true;
 		}
 		return res;
