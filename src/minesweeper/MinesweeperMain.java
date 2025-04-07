@@ -1,6 +1,5 @@
 package minesweeper;
 
-
 import java.util.Scanner;
 
 public class MinesweeperMain {
@@ -9,41 +8,76 @@ public class MinesweeperMain {
 
 	public static void main(String[] args) {
 
-		boolean boom = false;
-		Minesweeper.printBoard();
+		// Variables to manage loop exit
+		boolean bomb = false;
+		boolean winner = false;
+		
+		//Variables to storage the user's coords
+		int cordRows = 0;
+		int cordColumns= 0;
+		
+		//Put the mines on the board
 		Minesweeper.putMines();
-		Minesweeper.lookForMine(0, 0);
-		Minesweeper.printBoard();
-		while (boom) {
-
+		
+		
+		//Welcome the user
+		System.out.println("Welcome to MineSweeper");
+		do {
+			//Print the board
 			Minesweeper.printBoard();
+			
+			askCoordinateY();
+			cordRows = changeToInt(sc.nextLine().toUpperCase().charAt(0));
+			
+			//Asking the coords
+			askCoordinateX();
+			cordColumns = sc.nextInt() - 1;
+			sc.nextLine();
+			
+			
+			
 
+			
+			//Seek for the mine
+			if (Minesweeper.lookForMine(cordColumns, cordRows)) {
+				bomb = true;
+			} else {
+				winner = Minesweeper.winner();
+			}
+		} while (!winner && !bomb);
+		
+		if(bomb) {
+			System.out.println("YOU LOSE, STEPPED ON A BOMB");
+		}
+		
+		if(winner) {
+			System.out.println("YOU WIN!!!");
 		}
 
+		// Closing scanner
 		sc.close();
-
 	}
-	
-	public int changeToInt (char character) {
-		return (int) character - 11;
-	}
-
-	public static char askCoordinateX() {
-		char charX;
-
-		System.out.println("Enter rows");
-		charX = sc.nextLine().toUpperCase().charAt(0);
-
-		return charX;
+/**
+ * Method that casts the param character to int
+ * @param character Character that will be casted
+ * @return casted number 
+ */
+	public static int changeToInt(char character) {
+		return (int) (character - 'A');
 	}
 
-	public static int askCoordinateY() {
-		int y;
-
-		System.out.println("Enter columnns");
-		y = sc.nextInt();
-
-		return y;
+	/**
+	 * Method that asks the user for the row number
+	 */
+	public static void askCoordinateX() {
+		System.out.println("Enter column number");
 	}
+
+	/**
+	 * Method that asks the user for the column number
+	 */
+	public static void askCoordinateY() {
+		System.out.println("Enter row letter");
+}
 
 }

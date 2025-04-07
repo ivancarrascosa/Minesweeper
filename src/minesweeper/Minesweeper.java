@@ -13,6 +13,9 @@ public class Minesweeper {
 
 	private static int numberOfMines = 10;
 
+	/**
+	 * Method that prints the board with the row and column index
+	 */
 	public static void printBoard() {
 		char row = 'A';
 		for (int i = 1; i <= Columns; i++) {
@@ -30,6 +33,9 @@ public class Minesweeper {
 
 	}
 	
+	/**
+	 * Methot that put the 
+	 */
 	public static void putMines() {
 		for (int i = 0; i < fullBoard.length; i++) {
 			Arrays.fill(fullBoard[i], ' ');
@@ -92,7 +98,7 @@ public class Minesweeper {
 		return res;
 	}
 	
-	public static boolean ganador() {
+	public static boolean winner() {
 		boolean res = false;
 		int cont = 0;
 		for (int i = 0 ; i < Rows ; i++) {
